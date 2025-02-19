@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class FunnyBot extends TelegramLongPollingBot {
 
-    private final String BOT_USERNAME = System.getenv("randomSms");
-    private final String BOT_TOKEN = System.getenv("8014919412:AAFHfmhqeT3u4gbD1Q5h1hHvhaMYd0Sg3IM");
+    private final String BOT_USERNAME = System.getenv("BOT_USERNAME");
+    private final String BOT_TOKEN = System.getenv("BOT_TOKEN");
     //System.getenv
 
     private final Random random = new Random();
