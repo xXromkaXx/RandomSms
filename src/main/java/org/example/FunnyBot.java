@@ -80,17 +80,16 @@ public class FunnyBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             long chatId = update.getMessage().getChatId();
             String messageText = update.getMessage().getText();
-
-            // Бот відповідає в групі, якщо його тегнули або з ймовірністю 50%
-            if (update.getMessage().isGroupMessage()) {
-
-                if (messageText.contains("@" + getBotUsername()) || random.nextInt(100) < 50) {
-                    String randomResponse = responses.get(random.nextInt(responses.size()));
-                    sendTextMessage(chatId, randomResponse);
+// Бот відповідає в групі тільки іноді
+            if (update.getMessage().getChat().isGroupChat() || update.getMessage().getChat().isSuperGroupChat()) {
+                if (messageText.contains("@" + getBotUsername())) {
+                    // Якщо тегнули – відповідає завжди
+                    sendTextMessage(chatId, responses.get(random.nextInt(responses.size())));
+                } else if (random.nextInt(100) < 30) { // 30% шанс відповіді
+                    sendTextMessage(chatId, responses.get(random.nextInt(responses.size())));
                 }
             } else { // В особистих чатах відповідає завжди
-                String randomResponse = responses.get(random.nextInt(responses.size()));
-                sendTextMessage(chatId, randomResponse);
+                sendTextMessage(chatId, responses.get(random.nextInt(responses.size())));
             }
         }
     }
