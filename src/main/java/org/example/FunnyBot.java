@@ -23,7 +23,18 @@ public class FunnyBot extends TelegramLongPollingBot {
             "Навіщо мені відповідати, якщо ти сам знаєш відповідь? 😏",
             "Гугл в допомогу, друже! 😂",
             "Якщо довго дивитись на це повідомлення, можна побачити сенс життя... або ні.",
-            "лох просто"
+            "лох просто",
+            "Знаєш, я б зробив це, але мені ліньки. 😅",
+            "Ти серйозно зараз? 🤨",
+            "Хто це дозволив? 😂",
+            "Але я ж просто хотів бути нормальним... 😆",
+            "Так, це я, і що з того? 😎",
+            "Не знаю, як ви, але я намагаюсь вижити. 🫣",
+            "Не біда, просто життя. 😜",
+            "Ну що, поїхали? 🤙",
+            "Я ще не вирішив, чи це погано, чи дуже погано. 😏",
+            "Це просто шикарно! 🔥",
+            "йди нафіг "
     );
 
     @Override
@@ -34,7 +45,9 @@ public class FunnyBot extends TelegramLongPollingBot {
 
             // Бот відповідає в групі, якщо його тегнули або з ймовірністю 50%
             if (update.getMessage().isGroupMessage()) {
-                if (messageText.contains("@" + getBotUsername()) || random.nextInt(100) < 70) {
+                String randomResponse1 = responses.get(random.nextInt(responses.size()));
+                sendTextMessage(chatId, randomResponse1);
+                if (messageText.contains("@" + getBotUsername()) || random.nextInt(100) < 60) {
                     String randomResponse = responses.get(random.nextInt(responses.size()));
                     sendTextMessage(chatId, randomResponse);
                 }
@@ -72,7 +85,7 @@ public class FunnyBot extends TelegramLongPollingBot {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new FunnyBot());
-            System.out.println("Бот запущено!");
+
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
